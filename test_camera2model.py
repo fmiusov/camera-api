@@ -38,12 +38,17 @@ def main():
 
         # for name, capture, flip in camera_list:
             name, capture, flip = camera_list[0]
+
+            start_time = time.time()
             print(name)
 
             ret, frame = capture.read()
+            print (frame.shape, time.time() - start_time)
 
             if flip == "vert":
                 frame = cv2.flip(frame, 0)
+
+            # True == trun it through the model
             if False:
                 # pre-process the frame -> a compatible numpy array for the model
                 preprocessed_image = tensorflow_util.preprocess_image(frame, interpreter, model_image_dim, model_input_dim)
@@ -59,7 +64,7 @@ def main():
             else:
                 cv2.imshow(name, frame)
 
-            time.sleep(3)
+            # time.sleep(3)
 
             # Use key 'q' to close window
             if cv2.waitKey(1) & 0xFF == ord('q'):

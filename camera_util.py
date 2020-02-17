@@ -8,7 +8,7 @@ def get_camera(ip, port, username, password):
     URL = "http://{}:{}@{}/cgi-bin/mjpg/video.cgi?channel=0&subtype=1".format(username, password, ip)
 
     camera = cv2.VideoCapture(URL)     # returns a VideoCapture object
-    camera.set(cv2.CAP_PROP_FPS, 1)   # set the capture rate - not sure this did anyting
+    camera.set(cv2.CAP_PROP_FPS, 20)   # set the capture rate - not sure this did anyting
     # return the VideoCapture object
     return camera
 

@@ -1,13 +1,13 @@
 {
     "camera" : [
         {"name" : "cyclops",
-        "ip" : "192.168.1.108",
+        "ip" : "192.168.1.114",
         "port" : 80,
         "username" : "admin",
         "password" : "",
         "flip" : ""},
         {"name" : "4eyes",
-        "ip" : "192.168.1.114",
+        "ip" : "192.168.1.109",
         "port" : 80,
         "username" : "admin",
         "password" : "",
