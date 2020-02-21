@@ -34,15 +34,17 @@ import base64
 # 1080   15 fps, 0.93
 
 
-# Bcamera = AmcrestCamera("192.168.1.109",80,"admin","uwasat0ad").camera
-camera = AmcrestCamera("192.168.1.114",80,"admin","jg00dman").camera
+# camera = AmcrestCamera("192.168.1.109",80,"admin","uwasat0ad").camera
+camera = AmcrestCamera("192.168.1.142",80,"admin","jg00dman").camera
 cv2.namedWindow('Amcrest', cv2.WINDOW_NORMAL)
 
 # works
 # http://admin:uwasat0ad@192.168.1.109/cgi-bin/snapshot.cgi?channel=1
 # http://admin:uwasat0ad@192.168.1.109/cgi-bin/snapshot.cgi
+# http://admin:jg00dman@192.168.1.114/cgi-bin/snapshot.cgi
 
-# http://admin:uwasat0ad@192.168.1.109/cgi-bin/mjpg/video.cga
+# http://admin:uwasat0ad@192.168.1.109/cgi-bin/mjpg/video.cgi
+# http://admin:jg00dman@192.168.1.114/cgi-bin/mjpg/video.cgi
 
 # http://admin:uwasat0ad@192.168.1.109/cgi-bin/devAudioInput.cga?action=getCollect
 
@@ -56,7 +58,7 @@ data = {
 
 error_count = 0
 success_count = 0
-for i in range(5000):
+for i in range(5):
     start_time = time.time()
     print (start_time)
 
