@@ -18,4 +18,16 @@ cp research/object_detection/data/mscoco_label_map.pbtxt ~/projects/camera-api/m
 you need a tflite model - easiest place to get that is from s3  
 you should have created it using the ssd-dag/UnderstandingTensorRT_ConvertGraph notebook  
 
+## Generating Images
+
+## Labeling Images
+
+using github labelimg  
+follow the install directions found in the README.md  
+$ conda activate labelimg  
+$ cd ~/projects/labelImg  
+$ python labelImg.py  
+
+
+
 

@@ -3,6 +3,9 @@ import cv2
 import camera_util
 import gen_util
 
+
+# camera settings
+
 # get the app config - including passwords
 config = gen_util.read_app_config('app_config.json')
 
@@ -12,7 +15,8 @@ camera_count = 0
 
 # loop through the cameras found in the json 
 for camera in config['camera']:
-    print (camera['name'])
+    start_time = time.time()
+    print (camera['name'], start_time)
     # get the VideoCapture object for this camera
     capture = (camera_util.get_camera(
         camera['ip'],
