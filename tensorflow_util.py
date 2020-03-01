@@ -17,6 +17,56 @@ from google.protobuf import text_format
 from object_detection.protos import string_int_label_map_pb2
 #import tflite_runtime.interpreter as tflite
 
+def make_objects(boxes, class_ids_rev):
+    '''
+    boxes = list of bounding boxes
+    class_ids_rev = 
+    '''
+    objects = ''
+    for box in boxes:
+        if str(box["class_id"]) not in class_ids_rev:
+            continue
+        if box['xmin'] == box['xmax'] or box['ymin'] == box['ymax']:
+            print('Box size zero removed')
+            continue
+
+        class_name = class_ids_rev[str(box["class_id"])]
+        xmin = box["xmin"]
+        ymin = box["ymin"]
+        xmax = box["xmax"]
+        ymax = box["ymax"]
+        objects += """<object>
+        <name>{}</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>{}</xmin>
+            <ymin>{}</ymin>
+            <xmax>{}</xmax>
+            <ymax>{}</ymax>
+        </bndbox>
+    </object>""".format(class_name, xmin, ymin, xmax, ymax)
+    return objects
+
+def make_xml_string(folder, filename, path, width, height, objects, verified):
+    base = """<annotation{}>
+    <folder>{}</folder>
+    <filename>{}</filename>
+    <path>{}</path>
+    <source>
+        <database>Unknown</database>
+    </source>
+    <size>
+        <width>{}</width>
+        <height>{}</height>
+        <depth>3</depth>
+    </size>
+    <segmented>0</segmented>
+    {}
+    </annotation>""".format(verified, folder, filename, path, width, height, objects)
+    return base
+
 def get_tflite_interpreter(model_path):
     print ('TF Lite Model loading...')
     interpreter = tf.lite.Interpreter(model_path)
@@ -66,3 +116,12 @@ def preprocess_image(image, interpreter, model_image_dim, model_input_dim):
     resized_image = cv2.resize(image, model_image_dim, interpolation = cv2.INTER_AREA)  # resized to 300x300xRGB
     reshaped_image = np.reshape(resized_image, model_input_dim)                         # reshape for model (1,300,300,3)
     return reshaped_image
+
+def detected_objects_to_annotation(detected_objects):
+    '''
+    input:   detected objects = list(tuplie)
+                                (class_id, class_name, probability, xmin, ymin, xmax, ymax)
+
+    '''
+
+    return
