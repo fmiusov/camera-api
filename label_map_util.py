@@ -134,7 +134,8 @@ def get_label_map_dict(label_map_path, key):
    if not found it will use name
   Args:
     label_map_path: path to label_map.
-
+    key = [value, anything else]
+       
   Returns:
     A dictionary mapping label names to id.
   """
@@ -142,7 +143,10 @@ def get_label_map_dict(label_map_path, key):
   label_map_dict = {}
   if key == 'value':
     for item in label_map.item:
-      label_map_dict[item.name] = item.id
+      # item.display_name (if it exists in the pbtxt) -- mscoco, the name is some encoded valued
+      # in some pbtxt, there is no display_name, just name, then
+      #    label_map_dict[item.name] = item.id
+      label_map_dict[item.display_name] = item.id
   else:
     for item in label_map.item:
       # not sure if item.display_name is in the pbtxt

@@ -14,8 +14,9 @@ import numpy as np
 import tensorflow as tf
 
 
+# this is a different version (MY VERSION) of utils - because of inconsistencies in the pbtxt
+from label_map_util import get_label_map_dict
 
-from object_detection.utils.label_map_util import get_label_map_dict
 from object_detection.utils import ops as utils_ops
 from object_detection.utils.visualization_utils import STANDARD_COLORS
 from object_detection.utils.visualization_utils import draw_bounding_box_on_image
@@ -116,7 +117,7 @@ def voc_to_tfrecord_file(image_dir,
     # this uses only TensorFlow libraries
     # - no P Ferrari classes
 
-    label_map = get_label_map_dict(label_map_file)
+    label_map = get_label_map_dict(label_map_file, 'value')
     # label_map_dict = invert_dict(origin_label_map_dict)    # we need the id, not the name as the key
 
     train_list, val_list, test_list = gen_imageset_list(annotation_dir, training_split_tuple)
